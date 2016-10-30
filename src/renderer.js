@@ -1,7 +1,14 @@
 /**
  * Created by Shin on 30/10/2016.
  */
-console.log('test from renderer');
+const electron = require('electron');
+
+const ipc = electron.ipcRenderer;
+
 document.getElementById('start').addEventListener('click', _ => {
-    console.log('start clicked');
+    ipc.send('countdown-start');
+});
+
+ipc.on('countdown', (evt, count) => {
+    document.getElementById('count').innerHTML = count;
 });
